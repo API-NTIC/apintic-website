@@ -19,7 +19,9 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.css"
+        "styles.css",
+        "./assets/css/boosted.css",
+        "./assets/js/boosted.js"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
