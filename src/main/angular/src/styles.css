@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+.clear {
+	clear:both;
+}
+.left {
+	float:left;
+}
+.text-logo {
+	color:#34302D;
+  	font-weight:bold;
+  	margin-left:20pt;
+  	margin-top:18pt;
+  	font-size:13px;
+}
