@@ -12845,6 +12845,9 @@ a:focus {
   	.logo img {
   		width:175px !important;
   	}
+  	.nav-link {
+  		font-size: 0.5rem !important;
+  	}
 }
 
 /*# sourceMappingURL=boosted.css.map */
