@@ -12436,7 +12436,7 @@ caption {
 }
 
 .o-footer {
-  margin-top: 2.5rem;
+  /*margin-top: 2.5rem;*/
   background-color: #000;
 }
 
@@ -12660,7 +12660,7 @@ caption {
 }
 
 .carousel {
-  margin-bottom: 1.875rem;
+  /*margin-bottom: 1.875rem;*/
 }
 
 .carousel .carousel-item img {
@@ -12818,4 +12818,33 @@ a:focus {
   font-size: 1.25rem;
   color: #f16e00;
 }
+
+@media screen and (max-device-width:480px){
+  	.d-resp-none {
+  		display:block !important;
+  	}
+  	.d-resp-none p {
+  		font-size: 0.5rem !important;
+  	}
+  	.d-resp-none h1 {
+  		font-size: 0.625rem !important;
+  	}
+  	.o-footer * {
+  		font-size: 0.5rem !important;
+  	}
+  	.carousel-caption {
+  		bottom:0 !important;
+  		padding-top:0 !important;
+  		padding-bottom:0 !important;
+  	}
+  	.text-logo {
+  		font-size:0.5rem !important;
+  		margin-left:0pt !important;
+  		margin-top:3pt !important;
+  	}
+  	.logo img {
+  		width:175px !important;
+  	}
+}
+
 /*# sourceMappingURL=boosted.css.map */

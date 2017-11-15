@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent} from './commun/header/header.component';
 
 const routes: Routes = [
-  {path: '', pathMatch: 'full', redirectTo: 'welcome'},
+  {path: '', pathMatch: 'full', redirectTo: ''},
   {path: 'welcome', component: AppComponent},
 ];
 
