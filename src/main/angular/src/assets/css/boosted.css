@@ -12824,10 +12824,12 @@ a:focus {
   		display:block !important;
   	}
   	.d-resp-none p {
-  		font-size: 0.5rem !important;
+  		font-size: 0.46rem !important;
+  		margin-bottom: 5px !important;
   	}
   	.d-resp-none h1 {
   		font-size: 0.625rem !important;
+  		margin-bottom: 10px !important;
   	}
   	.o-footer * {
   		font-size: 0.5rem !important;
