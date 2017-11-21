@@ -3195,7 +3195,7 @@ input[type="button"].btn-block {
 }
 
 .collapse {
-  display: none;
+  /*display: none;*/
 }
 
 .collapse.show {
@@ -6169,11 +6169,15 @@ button.close {
   padding-top: 20px;
   padding-bottom: 20px;
   color: #ffffff;
-  text-align: justify;
+  text-align: left;
 }
 
 .carousel-caption .orange {
   color: #f16e00;
+}
+
+.carousel-caption p.bt-accueil {
+	text-align: justify;
 }
 
 .align-baseline {
@@ -12845,11 +12849,27 @@ a:focus {
   		margin-top:3pt !important;
   	}
   	.logo img {
-  		width:175px !important;
+  		width:100px !important;
   	}
   	.nav-link {
   		font-size: 0.5rem !important;
   	}
+  	.navbar-nav {
+  		flex-direction: row !important;
+  	}
+  	.nav-item {
+  		border-top: 0px !important;
+  	}
+  	.navbar-expand-lg, .navbar-expand-lg.minimized {
+  		min-height:0 !important;
+  	}
+  	.o-footer .o-footer-bottom {
+  		padding-top:0 !important;
+  		padding-bottom: 0 !important;
+  	}
 }
-
+.nav-orientation li {
+	display: inline !important;
+	float : left;
+}
 /*# sourceMappingURL=boosted.css.map */
