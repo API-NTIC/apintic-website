@@ -4,11 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.association.website</groupId>
-	<artifactId>web-apintic</artifactId>
+	<artifactId>test-octav-apintic</artifactId>
 	<version>2.1.0-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>web-apintic</name>
+	<!--<name>web-apintic</name>-->
+	<name>test-octav-apintic</name>
 	<description>Site web vitrine de l&#39;association API NTIC</description>
 
 	<parent>
@@ -88,38 +89,106 @@
 			   <artifactId>tomcat7-maven-plugin</artifactId>
 			   <version>2.2</version>
 			  </plugin>
+			  <!-- Compilation en JAVA ${java.version} -->
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-toolchains-plugin</artifactId>
+				<version>1.1</version>
+				<executions>
+					<execution>
+						<phase>validate</phase>
+						<goals>
+							<goal>toolchain</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<toolchains>
+						<jdk>
+							<version>${java.version}</version>
+						</jdk>
+					</toolchains>
+				</configuration>
+			</plugin>		
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+			</plugin>
+			  <plugin>
+				<groupId>external.atlassian.jgitflow</groupId>
+				<artifactId>jgitflow-maven-plugin</artifactId>
+				<version>1.0-m5.1</version>
+				<configuration>
+					<enableSshAgent>true</enableSshAgent>
+					<autoVersionSubmodules>true</autoVersionSubmodules>
+					<pushFeatures>false</pushFeatures>
+					<pushReleases>false</pushReleases>
+					<pushHotfixes>false</pushHotfixes>
+					<noDeploy>false</noDeploy>
+					<flowInitContext>
+						<versionTagPrefix>v</versionTagPrefix>
+						<masterBranchName>${masterBranchName}</masterBranchName>
+					</flowInitContext>
+				</configuration>
+			</plugin>
+			  <plugin>
 			    <groupId>com.github.eirslett</groupId>
 			    <artifactId>frontend-maven-plugin</artifactId>
-			    <version>1.5</version>			 
+			    <version>1.6</version>			 
 			    <configuration>
-			        <nodeVersion>v8.2.1</nodeVersion>
-			        <npmVersion>5.3.0</npmVersion>
-			        <workingDirectory>src/main/angular</workingDirectory>
+			        <nodeVersion>v6.9.5</nodeVersion>
+			        <workingDirectory>src/main/frontend</workingDirectory>
+					<nodeDownloadRoot>http://nodejs.org/dist/</nodeDownloadRoot>
+					<npmDownloadRoot>http://registry.npmjs.org/npm/</npmDownloadRoot>
+					<installDirectory>target</installDirectory>
 			    </configuration>			 
 			    <executions>
-			        <execution>
-			            <id>install node and npm</id>
-			            <goals>
-			                <goal>install-node-and-npm</goal>
-			            </goals>
-			        </execution>			 
-			        <execution>
-			            <id>npm install --registry=${npm.registry.url}</id>
-			            <goals>
-			                <goal>npm</goal>
-			            </goals>
-			        </execution>			 
-			        <execution>
-			            <id>npm run build</id>
-			            <goals>
-			                <goal>npm</goal>
-			            </goals>			 
-			            <configuration>
-			                <arguments>run build</arguments>
-			            </configuration>
-			        </execution>
-			    </executions>
+					<execution>
+						<id>install node and npm</id>
+						<goals>
+							<goal>install-node-and-npm</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>npm set strict-ssl false</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<configuration>
+							<arguments>set strict-ssl false</arguments>
+						</configuration>
+					</execution>
+					<execution>
+						<id>npm install --registry=${npm.registry.url}</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+					</execution>
+
+					<execution>
+						<id>npm run build</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<configuration>
+							<arguments>run build</arguments>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<groupId>external.atlassian.jgitflow</groupId>
@@ -153,8 +222,58 @@
 					</flowInitContext>
 				</configuration>
 			</plugin>
-			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-resources-frontend</id>
+						<phase>compile</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/classes/static/</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${project.build.directory}/frontend</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
+		<pluginManagement>
+			<plugins>
+			    <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+			    <plugin>
+			      <groupId>org.eclipse.m2e</groupId>
+			      <artifactId>lifecycle-mapping</artifactId>
+			      <version>1.0.0</version>
+			      <configuration>
+					<lifecycleMappingMetadata>
+					  <pluginExecutions>
+					    <pluginExecution>
+					      <pluginExecutionFilter>
+					        <groupId>org.apache.maven.plugins</groupId>
+					        <artifactId>maven-toolchains-plugin</artifactId>
+					        <versionRange>1.1</versionRange>
+					        <goals>
+					          <goal>toolchain</goal>
+					        </goals>
+					      </pluginExecutionFilter>
+					      <action>
+					        <ignore />
+					      </action>
+					    </pluginExecution>
+					  </pluginExecutions>
+					</lifecycleMappingMetadata>
+			      </configuration>
+			    </plugin>
+			
+			</plugins>
+		</pluginManagement>
 	</build>
 
 
